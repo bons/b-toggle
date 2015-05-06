@@ -1,4 +1,4 @@
-/* b-toggle - v0.1.0 - 2015-04-16
+/* b-toggle - v0.1.0 - 2015-05-06
 * https://github.com/bons/b-toggle
 * Copyright (c) 2015 Bons; Licensed MIT */
 
@@ -17,12 +17,16 @@ angular .module(MODULE_NAME, [])
             restrict: 'A',
             transclude: true,
             scope: {
-              isActive: '@',
+              isActive: '=?',
               onActive: '&',
               onIdle: '&'
             },
             link: function( scp, elm, attr, ctrl, trans )
             {
+              if(typeof scp.isActive === 'undefined')
+              {
+                scp.isActive = false;
+              }
 
               scp.$watch('isActive', function( newVal )
               {
